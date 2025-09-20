@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WATERCOIN AI QUALITY MONITOR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💧</text></svg>">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="container">        
+        <div class="header">
+            <h1>WATERCOIN AI QUALITY MONITOR</h1>
+            <p style="font-weight: 500;">Real-time AI monitoring sistem kualitas air minum</p>
+            <div class="logo-container">
+                <img src="watercoinlogo.png" alt="Watercoin Logo" class="watercoin-logo">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sensor-card">
+                <div class="sensor-title">
+                    <div class="sensor-icon">pH</div>
+                    pH Level
+                </div>
+                <div class="sensor-value" id="phValue">7.0</div>
+                <div class="sensor-unit">pH</div>
+            </div>
+
+            <div class="sensor-card">
+                <div class="sensor-title">
+                    <div class="sensor-icon">TDS</div>
+                    TDS Level
+                </div>
+                <div class="sensor-value" id="tdsValue">50</div>
+                <div class="sensor-unit">ppm</div>
+            </div>
+
+            <div class="status-section">
+                <div class="status-header">
+                    <h3 class="status-title" style="font-size:2.5rem;">Status Kualitas Air</h3>
+                    <div class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <p class="status-subtitle">SNI 6989-11:2019 & Permenkes RI No. 492/2010</p>
+                <div class="status-indicator status-safe" id="statusIndicator">
+                    Air Minum Aman
+                </div>
+
+                <div class="uv-control">
+                    <h4 class="uv-title">UV Sterilizer Control</h4>
+                    <div class="toggle-container">
+                        <span class="toggle-label">OFF</span>
+                        <div class="toggle-switch active" id="uvToggle"> 
+                            <div class="toggle-slider"></div>
+                        </div>
+                        <span class="toggle-label">ON</span>
+                    </div>
+                    <div class="uv-status uv-on" id="uvStatus">UV Sterilizer: ON</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by Watercoin</p>
+        </div>
+    </div>
+
+    <div class="parameters-panel" id="parametersPanel">
+        <div class="panel-header">
+            <h3 class="panel-title">Parameter Air Minum</h3>
+            <button class="close-btn" id="closePanel">×</button>
+        </div>
+
+        <div class="parameter-group">
+            <div class="group-title">Fisika / Physical</div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <div class="parameter-details">
+                        <span class="parameter-name">Warna (TCU)</span>
+                        <span class="parameter-limit">Max: 15</span>
+                    </div>
+                </div>
+                <span class="parameter-value value-safe" id="param-color">5</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Bau</span>
+                    <span class="parameter-limit">Standar: Tidak Berbau</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-odor">Tidak Berbau</span>
+            </div>
+            <div class="parameter-item">
+                <span class="parameter-name">Rasa</span>
+                <span class="parameter-value value-safe" id="param-taste">Tidak Berasa</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Kekeruhan (NTU)</span>
+                    <span class="parameter-limit">Max: 5</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-turbidity">0.4</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Suhu (°C)</span>
+                    <span class="parameter-limit">Suhu udara ± 3</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-temperature">25.5</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">TDS (mg/L)</span>
+                    <span class="parameter-limit">Max: 500</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-tds">50</span>
+            </div>
+        </div>
+
+        <div class="parameter-group">
+            <div class="group-title">Kimia / Chemical</div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Zat Organik (mg/L)</span>
+                    <span class="parameter-limit">Max: 10</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-organic">1.2</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">pH</span>
+                    <span class="parameter-limit">Range: 6.5 - 8.5</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-ph">7.1</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Kesadahan (mg/L)</span>
+                    <span class="parameter-limit">Max: 100</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-hardness">5.3</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Sulfat (mg/L)</span>
+                    <span class="parameter-limit">Max: 250</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-sulfate">1.4</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Nitrit (mg/L)</span>
+                    <span class="parameter-limit">Max: 3</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-nitrite">0.05</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Klorida (mg/L)</span>
+                    <span class="parameter-limit">Max: 250</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-chloride">2.8</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Nitrat (mg/L)</span>
+                    <span class="parameter-limit">Max: 50</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-nitrate">2.9</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Sianida (mg/L)</span>
+                    <span class="parameter-limit">Max: 0.07</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-cyanide">0.01</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Fluorida (mg/L)</span>
+                    <span class="parameter-limit">Max: 1.5</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-fluoride">0.1</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Ammonia (mg/L)</span>
+                    <span class="parameter-limit">Max: 1.5</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-ammonia">0.11</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Alumunium (mg/L)</span>
+                    <span class="parameter-limit">Max: 0.2</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-aluminum">0.02</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Tembaga (mg/L)</span>
+                    <span class="parameter-limit">Max: 2</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-copper">0.004</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Besi (mg/L)</span>
+                    <span class="parameter-limit">Max: 0.3</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-iron">0.015</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Mangan (mg/L)</span>
+                    <span class="parameter-limit">Max: 0.4</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-manganese">0.017</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Seng (mg/L)</span>
+                    <span class="parameter-limit">Max: 3</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-zinc">0.02</span>
+            </div>
+        </div>
+
+        <div class="parameter-group">
+            <div class="group-title">Mikrobiologi / Microbiological</div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">Total Koliform (/100mL)</span>
+                    <span class="parameter-limit">Max: 0</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-coliform">0</span>
+            </div>
+            <div class="parameter-item">
+                <div class="parameter-info">
+                    <span class="parameter-name">E. coli (/100mL)</span>
+                    <span class="parameter-limit">Max: 0</span>
+                </div>
+                <span class="parameter-value value-safe" id="param-ecoli">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

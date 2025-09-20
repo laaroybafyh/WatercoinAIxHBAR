@@ -1,0 +1,28 @@
+{
+  "name": "watercoin-deployment",
+  "version": "2.0.0",
+  "description": "Deployment scripts untuk Watercoin AI Monitoring System with HEDERA Integration",
+  "scripts": {
+    "deploy:frontend": "cd frontend && npm run build && echo 'Frontend build completed'",
+    "deploy:server": "cd server && npm run build && echo 'Server build completed'",
+
+    "start:production": "concurrently \"cd server && npm start\" \"cd frontend && npm start\"",
+    "test:all": "cd frontend && npm run test:all",
+    "check:tablet": "echo 'Checking Samsung Galaxy Tab S8 compatibility...' && cd frontend && npm run dev",
+    "build:all": "npm run deploy:frontend && npm run deploy:server && echo 'All builds completed successfully'",
+    "production:ready": "npm run build:all && npm run test:all && echo 'Production ready!'",
+    "dev:all": "bash ./scripts/dev-all.sh",
+    "install:all": "npm install && cd frontend && npm install && cd ../server && npm install",
+    "update:all": "npm update && cd frontend && npm update && cd ../server && npm update",
+    "audit:all": "npm audit && cd frontend && npm audit && cd ../server && npm audit"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/watercoin-ai-monitoring.git"
+  },
+  "author": "Watercoin Team",
+  "license": "MIT"
+}

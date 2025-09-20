@@ -1,0 +1,46 @@
+{
+  "name": "watercoin-ai-monitor-pos",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "test:local": "node --loader ts-node/esm tests/runTests.ts",
+    "test:hedera": "npx tsx tests/runHederaTests.ts",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "update-deps": "npm update && npm audit fix",
+    "deploy:hedera": "powershell -ExecutionPolicy Bypass -File ../scripts/hedera-deployment.ps1"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.72.0",
+    "dayjs": "^1.11.13",
+    "next": "^15.0.3",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3",
+    "zod": "^3.23.8",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.1.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^22.9.1",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^9.15.0",
+    "eslint-config-next": "^15.0.3",
+    "jest": "^30.1.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.17.0",
+    "npm": ">=9.0.0"
+  }
+}

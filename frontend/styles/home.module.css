@@ -1,0 +1,352 @@
+.pageWrapper{
+  min-height:100vh; 
+  display:flex; 
+  flex-direction:column; 
+  font-family:'Poppins', sans-serif; 
+  background: transparent;
+  overflow-x:hidden; 
+  padding-bottom:40px;
+  position: relative;
+  z-index: 1;
+}
+/* prevent any horizontal page shift caused by dynamic content or scrollbars */
+.navbar{
+  height:56px; 
+  display:flex; 
+  align-items:center; 
+  padding:0 16px; 
+  color:var(--text-on-gradient); 
+  flex-shrink:0; 
+  background:rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px);
+  box-shadow:0 4px 20px rgba(0,0,0,0.1); 
+  border-bottom:1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0 0 16px 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 10;
+}
+.logoWrap{display:flex; align-items:center;}
+.logoImg{height:40px; width:auto; border-radius:8px; margin-right:12px;}
+.spacer{flex:1;}
+.posButtonSmall{background:var(--card-bg); color:var(--primary); padding:10px 20px; border-radius:20px; font-weight:700; font-family:'Poppins', sans-serif; transition:all .2s ease; text-decoration:none; box-shadow: none;} 
+.posButtonSmall:hover{transform:none; box-shadow:none; background:#fff;} 
+
+.container{max-width:1280px; margin:0 auto; padding:8px 12px 40px 12px; flex:1; display:grid; grid-template-rows:auto auto; align-content:start; height:auto; min-height:calc(100vh - 96px); overflow:unset; gap:8px;}
+.header{display:flex; flex-direction:column; align-items:center; justify-content:flex-start; color:#fff; text-align:center; padding:4px 0 0 0;}
+.title{margin:0; font-size:clamp(31px, 5.4vw, 48px); line-height:1.0; text-align:center; font-family:'Poppins', sans-serif; font-weight:800; color:#fff; text-shadow: none; letter-spacing:-0.5px; text-transform:uppercase;} 
+.subtitle{margin:4px 0 0 0; opacity:.95; text-align:center; font-size:min(1.1vw, 16px); font-family:'Poppins', sans-serif; font-weight:600; max-width:100vw; color:#fff; text-shadow: none; white-space:normal; overflow:visible; text-overflow:unset;}
+.typingText{display:inline-block; vertical-align:middle}
+.typingCursor{display:inline-block; width:8px; height:1.2em; margin-left:6px; vertical-align:middle; background:transparent; border-left:2px solid #fff; animation: blinkCursor 1s steps(2, start) infinite}
+
+@keyframes blinkCursor{ 50% { border-color: transparent } }
+.posButton{display:none}
+
+.cardsGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px; align-items:stretch; grid-auto-rows:1fr}
+.mainContent{display:grid; grid-template-columns:760px 420px; gap:16px; align-items:start; height:auto; justify-content:center; align-self:start}
+.leftSection{display:flex; flex-direction:column; gap:20px; height:100%}
+.cardsGrid{display:grid; grid-template-columns:360px 360px; gap:20px; justify-content:center; align-items:start}
+.card{
+  background:var(--card-bg); 
+  border-radius:20px; 
+  padding:20px; 
+  box-shadow:0 8px 32px rgba(0,0,0,0.1); 
+  border:none; 
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+  display:flex; 
+  flex-direction:column; 
+  justify-content:space-between;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+} 
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(29, 165, 255, 0.1), transparent);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02); 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 0 20px rgba(29, 165, 255, 0.2);
+  border: 2px solid rgba(29, 165, 255, 0.3);
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:active {
+  transform: translateY(-4px) scale(1.01);
+  transition: all 0.1s ease;
+} 
+.cardHeader{font-weight:700; color:var(--primary); display:flex; align-items:center; gap:12px; font-family:'Poppins', sans-serif; font-size:20px;} 
+.badge{display:inline-flex; align-items:center; justify-content:center; background:var(--primary); color:var(--text-on-gradient); font-weight:800; border-radius:50%; width:32px; height:32px; font-size:14px; font-family:'Poppins', sans-serif;} 
+.cardValue{font-size:clamp(32px, 4.5vw, 52px); font-weight:800; color:#0D6CA3; margin-top:12px; font-family:'Poppins', sans-serif; text-shadow: none; margin-bottom:0;} 
+.cardUnit{opacity:.7; font-weight:600; font-family:'Poppins', sans-serif; color:#0D6CA3; font-size:14px;}
+
+.uvStatusCard{
+  background:var(--card-bg); 
+  border-radius:20px; 
+  padding:14px; 
+  text-align:center; 
+  box-shadow:0 8px 32px rgba(0,0,0,0.1); 
+  border:none; 
+  display:flex; 
+  align-items:flex-start; 
+  justify-content:center;
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+} 
+
+.uvStatusCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: none;
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.uvStatusCard:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.12), 0 0 16px rgba(29, 165, 255, 0.15);
+  border: 2px solid rgba(29, 165, 255, 0.2);
+}
+
+.uvStatusCard:hover::before {
+  left: 100%;
+} 
+
+/* Fixed sizes: keep boxes stable (prevents growing/shrinking when content changes)
+   Increased sizes so larger inner items (logos, longer labels) fit comfortably.
+   Use overflow:auto to allow internal scrolling if content still exceeds the box. */
+.cardsGrid .card{ height:200px; min-height:200px; max-height:200px; box-sizing:border-box; width:360px; min-width:360px; max-width:360px }
+.uvStatusCard{ height:315px; min-height:315px; max-height:315px; }
+.uvControlSection{ 
+  height:180px; 
+  min-height:180px; 
+  max-height:180px; 
+  background:var(--card-bg); 
+  border-radius:20px; 
+  padding:18px; 
+  border:none; 
+  position:relative;
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.uvControlSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: none;
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.uvControlSection:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.12), 0 0 16px rgba(29, 165, 255, 0.15);
+  border: 2px solid rgba(29, 165, 255, 0.2);
+}
+
+.uvControlSection:hover::before {
+  left: 100%;
+}
+
+.statusWaterSection{ 
+  height:255px; 
+  min-height:255px; 
+  max-height:255px; 
+  background:var(--card-bg); 
+  border-radius:20px; 
+  padding:18px; 
+  border:none; 
+  position:relative; 
+  box-sizing:border-box;
+  box-shadow:0 8px 32px rgba(0,0,0,0.1);
+  transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.statusWaterSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: none;
+  transition: all 0.6s ease;
+  z-index: 1;
+}
+
+.statusWaterSection:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.12), 0 0 16px rgba(29, 165, 255, 0.15);
+  border: 2px solid rgba(29, 165, 255, 0.2);
+}
+
+.statusWaterSection:hover::before {
+  left: 100%;
+}
+
+/* Identification image constraints */
+.identWrapper img{ max-height:160px; width:auto; display:block }
+
+/* Identification card internals */
+.identWrapper{display:flex; flex-direction:column; align-items:center; gap:6px; max-width:520px; width:100%; padding-top:6px}
+.identTitle{font-weight:800; color:#0D6CA3; font-size:20px; letter-spacing:0.2px; margin:0; text-transform:none}
+.identBrand{display:inline-flex; align-items:center; gap:12px; padding:8px 14px; border-radius:999px; font-weight:800; font-size:20px; text-transform:uppercase; letter-spacing:0.2px; box-shadow:none}
+.identIcon{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:50%; background:rgba(13,108,163,0.06); color:#0D6CA3; font-size:16px}
+.identText{display:inline-block; vertical-align:middle; font-size:20px; font-weight:600; font-family:'Poppins', sans-serif; text-align:center}
+.identBrandSafe{background:#e9f8f2; color:#0B6F3A; border:1px solid #cfe9da}
+.identBrandDanger{background:#fff5f5; color:#B00020; border:1px solid #f6c6c6; font-size:20px; font-weight:800}
+
+/* Logos row below identification pill */
+.identLogos{display:flex; gap:10px; justify-content:center; align-items:center; margin-top:12px; flex-wrap:wrap}
+.brandLogo{display:flex; align-items:center; justify-content:center; width:440px; height:224px; border-radius:8px; background:#fff; border:1px solid #eef6ff; color:#0b2b42; font-weight:700; font-size:13px; padding:8px}
+.brandLogoDim{opacity:0.35}
+.brandLogoActive{box-shadow:0 6px 18px rgba(11,108,163,0.08); border:1px solid rgba(11,108,163,0.12)}
+
+.brandLogoImage{max-width:100%; max-height:100%; width:400px; height:200px; object-fit:contain; display:block}
+
+.statusSection{background:transparent; border-radius:20px; padding:0; box-shadow:none; display:flex; flex-direction:column; gap:20px; position:relative; justify-content:flex-start; align-self:start; min-height:0; overflow:visible}
+.statusHeader{display:flex; align-items:center; justify-content:space-between;}
+.statusTitle{margin:0; color:#0D6CA3; font-family:'Poppins', sans-serif; font-weight:700; font-size:20px;}
+.menuButton{background:transparent; border:none; cursor:pointer; padding:10px; border-radius:12px; transition:all .2s ease;} 
+.menuButton:hover{transform:scale(1.02);} 
+.hamburger{width:28px; height:3px; background:var(--primary); position:relative; display:block; border-radius:3px; transition:all .2s ease;} 
+.hamburger::before,.hamburger::after{content:''; position:absolute; left:0; width:28px; height:3px; background:var(--primary); border-radius:3px; transition:all .2s ease;} 
+.hamburger::before{top:-8px;}
+.hamburger::after{top:8px;}
+
+.uvControlSection{background:var(--card-bg); border-radius:20px; padding:18px; border:none; min-height:120px; position:relative; flex:1}
+.uvControl{text-align:center;} 
+.uvControlTitle{text-align:center; margin:0 0 12px 0; color:var(--primary); font-size:18px; font-family:'Poppins', sans-serif; font-weight:700;} 
+.uvState{text-align:center; font-weight:700; color:var(--primary); font-family:'Poppins', sans-serif; margin:12px 0 0 0; font-size:16px;} 
+
+.statusWaterSection{background:var(--card-bg); border-radius:20px; padding:18px; border:none; position:relative; flex:none} 
+
+/* Ensure children inside statusSection don't stretch to fill the available height */
+.statusSection .uvControlSection,
+.statusSection .statusWaterSection {
+  flex: none;
+}
+.statusWaterTitle{text-align:center; margin:0 0 12px 0; color:var(--primary); font-size:18px; font-family:'Poppins', sans-serif; font-weight:700;} 
+
+.bannerSafe{background:transparent; color:var(--primary); border:none; padding:20px; border-radius:16px; font-weight:600; font-family:'Poppins', sans-serif; text-align:center; box-shadow:none; min-height:80px; display:flex; flex-direction:column; justify-content:center;} 
+.bannerDanger{background:transparent; color:#C62828; border:none; padding:20px; border-radius:16px; font-weight:600; font-family:'Poppins', sans-serif; text-align:center; box-shadow:none; min-height:80px; display:flex; flex-direction:column; justify-content:center;} 
+.bannerReason{font-weight:500; opacity:.9; margin-top:6px; font-size:12px; line-height:1.3;}
+
+.toggleWrap{display:flex; flex-direction:column; gap:12px;}
+.toggleRow{display:flex; align-items:center; gap:16px; justify-content:center;}
+.toggle{width:80px; height:36px; border-radius:999px; border:none; background:rgba(13,108,163,0.2); position:relative; cursor:pointer; transition:all .2s ease;}
+.toggle:hover{box-shadow:0 6px 20px rgba(13,108,163,.3);}
+.knobOff{position:absolute; left:3px; top:3px; width:30px; height:30px; background:#90CAF9; border-radius:50%; transition:all .2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
+.knobOn{position:absolute; right:3px; top:3px; width:30px; height:30px; background:#0D6CA3; border-radius:50%; transition:all .2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.2);}
+.toggleLabel{opacity:.7; font-family:'Poppins', sans-serif; font-weight:600; color:#0D6CA3;}
+.toggleLabelActive{font-weight:700; color:#0D6CA3; font-family:'Poppins', sans-serif;}
+
+.uvControl{margin-bottom:12px;}
+.uvState{text-align:center; font-weight:700; color:#0D6CA3; font-family:'Poppins', sans-serif; margin:8px 0;}
+
+.toggleWrap{display:flex; flex-direction:column; gap:8px;}
+.toggleRow{display:flex; align-items:center; gap:10px; justify-content:center;}
+.toggle{width:64px; height:28px; border-radius:999px; border:none; background:#e3f2fd; position:relative; cursor:pointer; transition:all .15s ease;}
+.toggle:hover{box-shadow:0 4px 12px rgba(13,108,163,.2);}
+.knobOff{position:absolute; left:2px; top:2px; width:24px; height:24px; background:#90caf9; border-radius:50%; transition:all .15s ease;}
+.knobOn{position:absolute; right:2px; top:2px; width:24px; height:24px; background:#0D6CA3; border-radius:50%; transition:all .15s ease;}
+.toggleLabel{opacity:.6; font-family:'Poppins', sans-serif; font-weight:600;}
+.toggleLabelActive{font-weight:700; color:#0D6CA3; font-family:'Poppins', sans-serif;}
+
+/* Samsung Galaxy Tab A8 optimizations (1280x800) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .container{max-width:100%; padding:16px; grid-template-rows:auto 1fr;}
+  .mainContent{grid-template-columns:1.5fr 1fr; gap:20px;}
+  .cardsGrid{grid-template-columns:1fr 1fr 1fr; gap:16px;}
+  .statusSection{min-height:420px;}
+  .title{font-size:35px;} 
+  .subtitle{font-size:18px;} 
+  .cardValue{font-size:44px;}
+  /* scale down the fixed boxes for tablet but keep them roomy */
+  .mainContent{grid-template-columns:640px 420px}
+  .cardsGrid{grid-template-columns:320px 320px}
+  .cardsGrid .card{ min-height:220px; max-height:220px; height:220px; width:320px; min-width:320px; max-width:320px }
+  .uvControlSection, .statusWaterSection{min-height:160px; padding:16px;}
+}
+
+@media (max-width: 768px){
+  .container{padding:10px;}
+  .mainContent{grid-template-columns:1fr; gap:12px;}
+  .cardsGrid{grid-template-columns:1fr; gap:10px;}
+  .cardValue{font-size:36px;}
+  .statusSection{min-height:auto; padding:12px;}
+  /* mobile: single column cards that fill available width */
+  .cardsGrid{grid-template-columns:1fr}
+  .cardsGrid .card{ min-height:200px; max-height:200px; height:200px; width:100%; min-width:0; max-width:100% }
+  .uvControlSection, .statusWaterSection{min-height:140px; padding:10px;}
+}
+
+@media (max-width: 480px){
+  .cardsGrid{gap:8px;}
+  .card{padding:16px;}
+  .container{padding:8px;}
+  .uvControlSection, .statusWaterSection{padding:8px; min-height:120px}
+}
+.card{background:#ffffff; border-radius:16px; padding:18px; box-shadow:none; border:1px solid #e3f2fd; height:100%; display:flex; flex-direction:column; justify-content:space-between}
+.cardHeader{font-weight:700; color:#0D6CA3; display:flex; align-items:center; gap:8px; font-size:20px}
+.badge{display:inline-flex; align-items:center; justify-content:center; background:#e3f2fd; color:#0D6CA3; font-weight:800; border-radius:50%; width:28px; height:28px}
+.cardValue{font-size:clamp(28px, 5.2vw, 56px); font-weight:800; color:#0b2b42; margin-top:6px; margin-bottom:0}
+.cardUnit{opacity:.6}
+
+.statusSection{margin-top:24px; background:rgba(255,255,255,.92); border-radius:16px; padding:16px}
+.statusSection{margin-top:12px; background:rgba(255,255,255,.92); border-radius:16px; padding:12px; text-align:center}
+.statusHeader{display:flex; align-items:center; justify-content:space-between}
+.statusTitle{margin:0; color:#0D6CA3}
+ .statusTitle{margin:0; color:#0D6CA3; text-align:center}
+.menuButton{background:transparent; border:none; cursor:pointer}
+.hamburger{width:28px; height:3px; background:#0D6CA3; position:relative; display:block; border-radius:3px}
+.hamburger::before,.hamburger::after{content:''; position:absolute; left:0; width:28px; height:3px; background:#0D6CA3; border-radius:3px}
+.hamburger::before{top:-8px}
+.hamburger::after{top:8px}
+
+.bannerSafe{background:#e6f7ec; color:#1b5e20; border:1px solid #a5d6a7; padding:14px 16px; border-radius:14px; font-weight:700}
+.bannerDanger{background:#fdecea; color:#c62828; border:1px solid #ef9a9a; padding:14px 16px; border-radius:14px; font-weight:700}
+.bannerReason{font-weight:500; opacity:.8; font-size:12px; line-height:1.3}
+
+.uvControl{margin-top:16px}
+.uvState{text-align:center; font-weight:700; color:#0D6CA3}
+
+.toggleWrap{display:flex; flex-direction:column; gap:8px}
+.toggleRow{display:flex; align-items:center; gap:10px; justify-content:center}
+.toggle{width:72px; height:32px; border-radius:999px; border:none; background:#e3f2fd; position:relative; cursor:pointer}
+.knobOff{position:absolute; left:4px; top:4px; width:24px; height:24px; background:#90caf9; border-radius:50%}
+.knobOn{position:absolute; right:4px; top:4px; width:24px; height:24px; background:#1DA5FF; border-radius:50%}
+.toggleLabel{opacity:.6}
+.toggleLabelActive{font-weight:800; color:#0D6CA3}
+
+@media (max-width: 720px){
+  .cardsGrid{grid-template-columns:1fr; gap:16px;}
+}
+
+

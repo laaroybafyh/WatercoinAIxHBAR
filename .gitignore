@@ -1,0 +1,413 @@
+# ========================================
+# WATERCOIN APTOS POS SYSTEM
+# Comprehensive .gitignore for production
+# Updated: September 2025
+# ========================================
+
+# =============================================================================
+# NODE.JS & NPM
+# =============================================================================
+
+# Dependencies
+node_modules/
+jspm_packages/
+
+# NPM logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Package lock files (choose one)
+# yarn.lock
+# pnpm-lock.yaml
+
+# Yarn v2+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.yarn-integrity
+
+# NPM cache
+.npm
+.node_repl_history
+*.tgz
+
+# =============================================================================
+# NEXT.JS & REACT
+# =============================================================================
+
+# Next.js build outputs
+.next/
+out/
+build/
+dist/
+
+# Next.js cache
+.next/cache/
+.next/BUILD_ID
+.next/build-manifest.json
+
+# Static exports
+*.static/
+
+# Vercel
+.vercel
+
+# Turbo
+.turbo/
+
+# =============================================================================
+# TYPESCRIPT
+# =============================================================================
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# Type definitions
+*.d.ts.map
+
+# =============================================================================
+# ENVIRONMENT & CONFIGURATION
+# =============================================================================
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Local configuration overrides
+config.local.json
+settings.local.json
+local.config.js
+
+# =============================================================================
+# DATABASE & PRISMA
+# =============================================================================
+
+# Prisma
+prisma/migrations/
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.db3
+
+# Database backups
+*.dump
+*.sql.gz
+
+# =============================================================================
+# TESTING & COVERAGE
+# =============================================================================
+
+# Test results
+test-results/
+coverage/
+*.lcov
+.nyc_output
+.coverage/
+junit.xml
+
+# Playwright
+playwright-report/
+blob-report/
+test-results/
+
+# Jest
+jest-coverage/
+
+# =============================================================================
+# BLOCKCHAIN & APTOS
+# =============================================================================
+
+# Aptos CLI
+.aptos/
+
+# Move build artifacts
+build/
+*.mv
+
+# Wallet private keys (CRITICAL SECURITY)
+*.private
+*.seed
+*.mnemonic
+private-keys/
+wallets/
+.wallet/
+
+# Blockchain logs
+blockchain-logs/
+node-logs/
+
+# =============================================================================
+# LOGS & RUNTIME
+# =============================================================================
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# =============================================================================
+# CACHING & BUNDLING
+# =============================================================================
+
+# Bundle analyzer
+.webpack-bundle-analyzer/
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache
+
+# SWC cache
+.swc/
+
+# =============================================================================
+# OPERATING SYSTEMS
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*
+
+# =============================================================================
+# EDITORS & IDEs
+# =============================================================================
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+\#*\#
+.\#*
+
+# Eclipse
+.metadata
+.project
+.classpath
+
+# =============================================================================
+# DEPLOYMENT & BUILD ARTIFACTS
+# =============================================================================
+
+# Build artifacts
+*.wasm
+*.wasm.gz
+*.tar.gz
+
+# Android build
+android-twa/app/build/
+android-twa/app/release/
+android-twa/.gradle/
+android-twa/local.properties
+
+# =============================================================================
+# SECURITY & SENSITIVE DATA
+# =============================================================================
+
+# Certificates and keys
+*.key
+*.pem
+*.crt
+*.csr
+*.p12
+*.pfx
+*.cert
+*.cer
+
+# API keys and secrets
+secrets/
+.secrets/
+api-keys/
+
+# JWT tokens
+*.jwt
+
+# =============================================================================
+# MONITORING & ANALYTICS
+# =============================================================================
+
+# Performance monitoring
+.clinic/
+0x/
+
+# Analytics
+.analytics/
+analytics.json
+
+# Sentry
+.sentryclirc
+
+# =============================================================================
+# TEMPORARY & BACKUP FILES
+# =============================================================================
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Backup directories
+backup/
+backups/
+
+# =============================================================================
+# MEDIA & UPLOADS
+# =============================================================================
+
+# User uploads (exclude from repo)
+uploads/
+user-content/
+
+# Generated screenshots
+screenshots/
+test-screenshots/
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+
+# Generated docs
+docs/build/
+api-docs/
+.docusaurus/
+
+# =============================================================================
+# KEEP THESE IMPORTANT FILES
+# =============================================================================
+
+# Keep essential configuration files
+!package.json
+!package-lock.json
+!tsconfig.json
+!next.config.*
+!tailwind.config.*
+!postcss.config.*
+!*.md
+!scripts/*.ps1
+!scripts/*.sh
+
+# Keep public assets (but exclude user uploads)
+!frontend/public/
+!deployment/public/
+!frontend/public/**/*.png
+!frontend/public/**/*.jpg
+!frontend/public/**/*.jpeg
+!frontend/public/**/*.svg
+!frontend/public/**/*.ico
+!frontend/public/**/*.webp
+!frontend/public/**/*.pdf
+!frontend/public/**/*.js
+!frontend/public/**/*.css
+!frontend/public/**/*.html
+!frontend/public/**/*.json
+
+# Keep important project structure
+!README.md
+!LICENSE
+!CHANGELOG.md
+!DEPLOYMENT_INSTRUCTIONS.md
+!ANDROID_INSTRUCTIONS.md
+
+# =============================================================================
+# PROJECT SPECIFIC
+# =============================================================================
+
+# Watercoin specific
+sensor-data/
+pos-logs/
+transaction-cache/
+
+# AI/ML models (large files)
+*.model
+*.pkl
+*.h5
+models/
+
+# Generated QR codes (cache)
+qr-cache/
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# Monorepo tools
+.lerna/
+.nx/cache
+.rush/
+common/temp/
+
+# Git hooks
+.husky/_
+
+# Storybook
+.storybook-out
+.out
+
+# =============================================================================
+# END OF .GITIGNORE
+# =============================================================================

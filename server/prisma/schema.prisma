@@ -1,0 +1,117 @@
+// Prisma Schema v5.22.0 - Latest optimizations
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters", "relationJoins", "omitApi"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Tenant {
+  id          String   @id @default(cuid())
+  name        String   @db.VarChar(100)
+  apiKeyHash  String   @db.VarChar(255)
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(6)
+  locations   Location[]
+  products    Product[]
+  sales       Sale[]
+  
+  @@map("tenants")
+  @@index([createdAt])
+}
+
+model Location {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(100)
+  address   String?  @db.VarChar(255)
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  devices   Device[]
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  
+  @@map("locations")
+  @@index([tenantId])
+}
+
+model Device {
+  id         String   @id @default(cuid())
+  deviceId   String   @unique @db.VarChar(50)
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id])
+  snapshots  Snapshot[]
+  createdAt  DateTime @default(now()) @db.Timestamptz(6)
+  
+  @@map("devices")
+  @@index([locationId])
+}
+
+model Snapshot {
+  id        String   @id @default(cuid())
+  deviceId  String
+  device    Device   @relation(fields: [deviceId], references: [id])
+  ts        DateTime @default(now()) @db.Timestamptz(6)
+  ph        Float
+  tds       Float
+  raw       Json
+  
+  @@map("snapshots")
+  @@index([deviceId, ts])
+}
+
+model Product {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+  name      String   @db.VarChar(100)
+  price     Int
+  active    Boolean  @default(true)
+  sales     Sale[]
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  
+  @@map("products")
+  @@index([tenantId])
+}
+
+model Sale {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id])
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id])
+  quantity    Int      @default(1)
+  liters      Int
+  amount      Int
+  payment     PaymentMethod
+  result      PaymentResult
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  sentiment   Sentiment @default(POSITIVE)
+  
+  @@map("sales")
+  @@index([createdAt])
+  @@index([tenantId])
+}
+
+enum PaymentMethod {
+  WATERIANS
+  WATERCOIN_QR
+  QRIS
+  CASH
+}
+
+enum PaymentResult {
+  SUCCESS
+  FAILED
+}
+
+enum Sentiment {
+  POSITIVE
+  NEUTRAL
+  NEGATIVE
+}
+
+

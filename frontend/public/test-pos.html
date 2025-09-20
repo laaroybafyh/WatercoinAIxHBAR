@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Settings Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-section { background: white; padding: 20px; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+        button { padding: 10px 20px; margin: 10px 0; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        input { padding: 8px; margin: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 4px; }
+        .success-bg { background: #d4edda; }
+        .error-bg { background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>🧪 POS Settings Functionality Test</h1>
+    
+    <div class="test-section">
+        <h2>🔢 Test 1: Price Input Validation</h2>
+        <p>Test input dengan leading zeros dan validasi:</p>
+        <input type="text" id="priceTest" placeholder="Coba: 00123, 0.50, abc">
+        <button onclick="testPriceInput()">Test Price Input</button>
+        <div id="priceResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Test 2: Image Upload Simulation</h2>
+        <p>Simulasi upload gambar dengan berbagai ukuran file:</p>
+        <button onclick="testImageValidation()">Test Image Validation</button>
+        <div id="imageResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Test 3: Product Creation</h2>
+        <input type="text" id="productName" placeholder="Product Name">
+        <input type="text" id="productPrice" placeholder="Price">
+        <button onclick="testProductCreation()">Test Product Creation</button>
+        <div id="productResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔗 Navigation Links</h2>
+        <p>Test aplikasi secara manual:</p>
+        <button onclick="window.open('http://localhost:3001/pos/settings', '_blank')">Open Settings Page</button>
+        <button onclick="window.open('http://localhost:3001/pos', '_blank')">Open POS Main Page</button>
+    </div>
+
+    <script>
+        function testPriceInput() {
+            const input = document.getElementById('priceTest').value;
+            const result = document.getElementById('priceResult');
+            
+            // Test regex validation
+            const isValid = /^\d*\.?\d*$/.test(input);
+            
+            // Test leading zero removal
+            let processed = input;
+            if (input !== '' && isValid) {
+                if (input.includes('.')) {
+                    const parts = input.split('.');
+                    const intPart = parts[0] || '';
+                    const decPart = parts[1] || '';
+                    const cleanedIntPart = intPart === '' ? '0' : intPart.replace(/^0+/, '') || '0';
+                    processed = cleanedIntPart + '.' + decPart;
+                } else if (input.length > 1 && input[0] === '0') {
+                    processed = input.replace(/^0+/, '') || '0';
+                }
+            }
+            
+            result.innerHTML = `
+                <div class="result ${isValid ? 'success-bg' : 'error-bg'}">
+                    <strong>Input:</strong> "${input}"<br>
+                    <strong>Valid:</strong> ${isValid ? '✅' : '❌'}<br>
+                    <strong>Processed:</strong> "${processed}"<br>
+                    <strong>Parse Float:</strong> ${parseFloat(processed) || 'NaN'}
+                </div>
+            `;
+        }
+
+        function testImageValidation() {
+            const result = document.getElementById('imageResult');
+            
+            const testFiles = [
+                { name: 'small.jpg', size: 500 * 1024, type: 'image/jpeg' },
+                { name: 'large.png', size: 3 * 1024 * 1024, type: 'image/png' },
+                { name: 'document.pdf', size: 200 * 1024, type: 'application/pdf' },
+                { name: 'valid.gif', size: 800 * 1024, type: 'image/gif' }
+            ];
+            
+            let output = '';
+            testFiles.forEach(file => {
+                const isValidSize = file.size <= 2 * 1024 * 1024;
+                const isValidType = file.type.startsWith('image/');
+                const isValid = isValidSize && isValidType;
+                
+                output += `
+                    <div class="result ${isValid ? 'success-bg' : 'error-bg'}">
+                        <strong>${file.name}</strong> (${(file.size / 1024 / 1024).toFixed(2)}MB, ${file.type})<br>
+                        Size OK: ${isValidSize ? '✅' : '❌'} | Type OK: ${isValidType ? '✅' : '❌'} | Valid: ${isValid ? '✅' : '❌'}
+                    </div>
+                `;
+            });
+            
+            result.innerHTML = output;
+        }
+
+        function testProductCreation() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const result = document.getElementById('productResult');
+            
+            const isNameValid = name.trim() !== '';
+            const priceNum = parseFloat(price);
+            const isPriceValid = !isNaN(priceNum) && priceNum > 0;
+            const isValid = isNameValid && isPriceValid;
+            
+            const product = {
+                id: 'test-' + Date.now(),
+                name: name.trim(),
+                price: priceNum,
+                image: null
+            };
+            
+            result.innerHTML = `
+                <div class="result ${isValid ? 'success-bg' : 'error-bg'}">
+                    <strong>Validation:</strong><br>
+                    Name: "${name}" ${isNameValid ? '✅' : '❌'}<br>
+                    Price: "${price}" → ${priceNum} ${isPriceValid ? '✅' : '❌'}<br>
+                    <strong>Overall Valid:</strong> ${isValid ? '✅' : '❌'}<br>
+                    ${isValid ? `<strong>Product Created:</strong> ${JSON.stringify(product, null, 2)}` : ''}
+                </div>
+            `;
+        }
+
+        // Auto-run basic tests
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 POS Settings Test Page Loaded');
+            console.log('Ready for manual testing!');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "short_name": "Watercoin POS",
+  "description": "Watercoin APTOS Point of Sale System for Samsung Tab8",
+  "orientation": "landscape",
+  "categories": [
+    "business",
+    "finance",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "type": "image/png",
+      "src": "/watercoinlogo.png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "type": "image/png",
+      "src": "/watercoinlogo.png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "display": "standalone",
+  "prefer_related_applications": false,
+  "start_url": "/pos",
+  "scope": "/",
+  "theme_color": "#0D6CA3",
+  "lang": "id",
+  "background_color": "#ffffff",
+  "name": "Watercoin APTOS POS"
+}
